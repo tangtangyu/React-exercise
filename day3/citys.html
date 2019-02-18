@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.js"></script> 
+    <script type="text/babel">
+        class Index extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {
+                    list:[
+                        {
+                            city:'北京',
+                            style:{
+                                color:'red',
+                                fontSize:'20px'
+                            }
+                        },
+                        {
+                            city:'大连',
+                            style:{
+                                color:'skyblue'
+                            }
+                        },
+                        {
+                            city:'青岛',
+                            style:{
+                                color:'green'
+                            }
+                        }
+                    ]
+                }
+            }
+
+            // changeMeg(){
+            //         let {
+            //             list
+            //             }=this.state;
+            //         list[1].city='上海'
+            //         this.setState({
+            //             list
+            //         })
+            // }
+
+            render(){
+                let {
+                    list
+                }=this.state;
+                return <div>
+                    <Citys list={list} />
+                </div>
+            }
+        }
+
+        class Citys extends React.Component{
+            //当没有数据时的默认数据
+            // static defaultProps = {   
+            //     list:[
+            //         {
+            //             city:'没数据',
+            //             style:{
+            //                 color:'red',
+            //                 fontSize:'20px'
+            //             }
+            //         }
+            //     ]
+            // }
+            constructor(props){
+                super(props);
+                this.state = {
+                    list:props.list
+                }
+            }
+            render(){
+                let {
+                    list
+                } = this.state;
+                return <div>
+                    {
+                        list.map((v,i)=>{return <p key={i} style={{...v.style}}>{v.city}</p>})
+                    }
+                </div>
+            }
+        }
+
+        ReactDOM.render(
+            <Index />,
+            document.getElementById('box')
+        )
+    </script> 
+</body>
+</html>

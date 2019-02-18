@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.js"></script> 
+    <script type="text/babel">
+        class Money{
+            static add(obj,obj_1) {
+                return obj.number + obj_1.number
+            }
+
+            constructor (number) {
+                this.number=number
+            }
+
+            add(obj) {
+                // console.log(obj.number)//66
+                // console.log(this.number)//105
+                return this.number+obj.number
+            }
+            valueOf(){
+                return this.number
+            }
+            toString(){
+                return this.number
+            }
+        }
+
+        let one = new Money(105)
+        let two = new Money(66)
+        let three = one.add(two)
+        let four = Money.add(one,two)
+        let five = new Money(one+two)
+       console.log(`${three} ${four} ${five}`)
+    </script>
+</body>
+</html>

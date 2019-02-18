@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.js"></script>
+    <script type="text/babel">
+        let timer;
+        class Index extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {
+                    text:'前半生漂泊无依'
+                }
+            }
+            changeMsg(){
+                timer=setTimeout(() => {
+                    this.setState({
+                        text:'后半生飞黄腾达'
+                    })
+                }, 2000);
+            }
+            render(){
+                let {
+                    text
+                } = this.state;
+                !timer && this.changeMsg();
+                return <div>
+                   <App  text={text} />
+                </div>
+            }
+        }
+
+        class App extends React.Component{
+
+            render(){
+                let {
+                    text
+                }=this.props;
+                return <div>{text}</div>
+            }
+        }
+
+        ReactDOM.render(
+            <Index />,
+            document.getElementById('box')
+        )
+    </script>
+</body>
+</html>

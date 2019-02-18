@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .bg{
+            background:orange;
+            width:200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.js"></script>
+    <script type="text/babel"> 
+        class Index extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {
+                    list:[
+                        {
+                            name:'Menu1'
+                        },
+                        {
+                            name:'Menu2'
+                        },
+                        {
+                            name:'Menu3'
+                        },
+                        {
+                            name:'Menu4',
+                            children:[
+                                'Sub Menu 1','Sub Menu 2','Sub Menu 3','Sub Menu 4'
+                            ]
+                        },
+                        {
+                            name:'ExternalLink'
+                        }
+                    ],
+                    defauleStyle:0
+                }
+            }
+            render(){
+                let {
+                    list,
+                    defaultStyle
+                }=this.state;
+                return <div style={{width:'200px',background:'#666',color:'#fff'}}>
+                        {
+                            list.map((v,i)=>{
+                                return <p key={i} className={defaultStyle === i ? 'bg' : ''} onClick={()=>{
+                                    this.setState({
+                                        defaultStyle : i
+                                    })
+                                }}>{v.name}</p>
+
+                            })
+                        }
+                        
+                </div>
+            }
+            // componentDidMount(){
+                
+            // }
+        }
+
+        // class App extends React.Component{
+        //     render(){
+        //         let {
+        //             list,
+        //             text
+        //         } = this.props;
+        //         return <div>
+        //             {
+        //                 list
+        //             }
+        //         </div>
+        //     }
+        // }
+
+        ReactDOM.render(
+                <Index />,
+                document.getElementById('box')
+            )
+    </script>
+</body>
+</html>

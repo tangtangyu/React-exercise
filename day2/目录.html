@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.js"></script> 
+    <script type="text/babel">
+        class App extends React.Component{
+            constructor(app){
+                super(app),
+                this.state = {
+                    list: {
+                        type:'ul',
+                        props: {
+                            id:'ul'
+                        },
+                        children: [
+                            {
+                                type:'li',
+                                name:'保障篇',
+                                props:{
+                                    className:'baozhang'
+                                },
+                                children: [
+                                    {
+                                        type:'span',
+                                        name:'保障' ,
+                                        children: [
+                                            {
+                                                type:'span',
+                                                name:'保障1' 
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                type:'li',
+                                name:'名师篇',
+                                props:{
+                                    className:'treach'
+                                },
+                                children:[
+                                    {
+                                        type:'span',
+                                        name:'名师简介' ,
+                                        children:[
+                                            {
+                                                type:'span',
+                                                name:'简介1'         
+                                            }
+                                        ]        
+                                    }
+                                ]
+                            }
+                        ]
+                    } 
+                }
+            }
+
+            renderDom(tag) {
+                return React.createElement(
+                    tag.type,
+                    {
+                       ...tag.props
+                    },
+                    tag.children ? tag.children.map((val,ind) => {
+                        return <div key={ind} style={{paddingLeft:'10px'}}>
+                            {tag.name } 
+                            {this.renderDom(val)}
+                        </div>
+                    }) : <div style={{paddingLeft:'10px'}}>{tag.name}</div>
+                )
+                
+            }
+
+            render() {
+                let {
+                    list
+                } = this.state;
+                return <div> 
+                    {this.renderDom(list)}
+                </div>
+            }
+
+        }
+        ReactDOM.render(
+            <App />,
+            document.getElementById('box')
+        )
+    </script>
+</body>
+</html>

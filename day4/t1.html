@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .bg{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.js"></script>
+    <script type="text/babel"> 
+    class Index extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {
+                list:{
+                    "早餐类":[
+                        "皮蛋瘦肉粥",
+                        "黑米粥",
+                        "小米粥"
+                    ],
+                    "饮料":[
+                        "橙汁",
+                        "雪碧",
+                        "可乐"
+                    ],
+                    "小食":[
+                        "薯塔",
+                        "枣糕",
+                        "米饼"
+                    ]
+                },
+                defaultStyle:0
+            }
+        }
+        render(){
+            let {
+                list,
+                defaultStyle
+            } = this.state;
+            return <div>
+                {
+                    Object.keys(list).map((v,i)=>{return <span style={{padding:'10px'}} key={i} className={defaultStyle === i ? 'bg' : ""} onClick={()=>{
+                        this.setState({
+                            defaultStyle:i 
+                        })
+                    }}>{v}</span>})
+                }
+                <App cont={list[Object.keys(list)[defaultStyle]]} />
+            </div>
+        }
+    }  
+
+    class App extends React.Component{
+        render(){
+            let {
+                list,
+                cont
+            } = this.props;
+            return <div>{cont.map((v,i)=>{return <b style={{padding:'10px'}}>{v}</b>})}</div>
+        }
+    }
+        
+     ReactDOM.render(
+            <Index />,
+            document.getElementById('box')
+        )
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .bg{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.js"></script>
+    <script type="text/babel"> 
+        class Index extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {
+                    list:{
+                        "豪华型轿车":[
+                            "兰博基尼",
+                            "法拉第",
+                            "玛莎拉蒂"
+                        ],
+                        "中等型轿车":[
+                            "林肯",
+                            "奥迪",
+                            "奔驰"
+                        ],
+                        "普通型轿车":[
+                            "尼桑",
+                            "现代",
+                            "大众"
+                        ]
+                    },
+                    defaultIndex:0
+                }
+            }
+            render(){
+                let {
+                    list,
+                    defaultIndex
+                } = this.state;
+                return <div>
+                    {Object.keys(list).map((v,i)=>{return <span key={i} className={defaultIndex === i ? 'bg' : ''} style={{padding:'5px'}} onClick={()=>{
+                        this.setState({
+                            defaultIndex:i
+                        })
+                    }
+                    }>{v}</span>})}
+                    <Detail cont={list[Object.keys(list)[defaultIndex]]} />
+                </div>
+            }
+        }
+
+        class Detail extends React.Component{
+            render(){
+                //console.log(this.props.cont)
+                let {
+                    cont
+                } = this.props;
+                return <div>
+                    {
+                        cont.map((v,i)=>{
+                            return <div key={i}>{v}</div>
+                        })
+                    }
+                </div>
+            }
+        }
+
+        ReactDOM.render(
+            <Index />,
+            document.getElementById('box')
+        )
+    </script>
+</body>
+</html>

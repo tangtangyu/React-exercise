@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            type:'div',
+            props:{
+                id:'box'
+            },
+            content:['小盒子',
+            {
+                type:'p',
+                props:{
+                    id:'text'
+                },
+                content:['我是小盒子的子集']
+            }]
+        }
+
+        function createElement(objs){
+            let {
+                type,
+                props,
+                content
+            }=objs;
+            let newDom=document.createElement(type);
+            Object.keys(props).forEach((v,i) => {
+                newDom.setAttribute(v,props[v])
+            })
+            content.forEach((val,ind) => {
+                if(typeof val === 'string'){
+                    let newText = document.createTextNode(val);
+                    newDom.appendChild(newText);
+                }else{
+                    newDom.appendChild(createElement(val));
+                }
+            })
+            return newDom //函数必须返回
+        }
+        document.body.appendChild(createElement(obj));
+    </script>
+</body>
+</html>

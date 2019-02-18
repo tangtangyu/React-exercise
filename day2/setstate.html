@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.js"></script> 
+    <script type="text/babel">
+        
+        class App extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    name:'tom'
+                }
+            }
+
+            render(){
+                let {
+                    name
+                }=this.state;
+                return <div>
+                    父组件
+                    <Index user={name} age={18}/>
+                </div>
+            }
+        }
+
+        class Index extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    name:props.user,
+                    age:props.age,
+                    flag:false
+                }
+            }
+
+            changeFlag(){
+                
+                setTimeout(() => {
+                    // this.setState({
+                    //     flag:true
+                    // })
+                    this.setState((state) => {
+                        return {
+                            flag:true
+                        }
+                    })
+                }, 2000);
+
+                // setTimeout(() => {
+                    // this.setState({
+                    //     flag:true
+                    // });
+                    // console.log('state',this.state.flag)
+                // })
+                
+            }
+
+            render() {
+                let {
+                    name,
+                    age,
+                    flag
+                } = this.state;
+                // let obj = {
+                //     name:'sun',
+                //     consoT:function(){
+                //         consle.log(this)
+                //     }
+                // }
+                // obj.consoT()
+                this.changeFlag();
+                return <div>
+                {name}:{age}
+                {
+                    flag && '铛铛铛~'
+                }
+                </div>
+            }
+        }
+
+        ReactDOM.render(
+            <App />,
+            document.getElementById('box')
+        )
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.js"></script> 
+    <script type="text/babel">
+        let timer;
+        class Index extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {
+                   change:'生命周期' 
+                }
+            }
+            componentWillMount(){ //组件挂载之前
+                console.log('componentWillMount')
+            }
+            // componentWillReceiveProps(nextProps){ //props更新时触发，会影响shouldComponentUpdate
+            //     console.log('componentWillReceiveProps')
+            // }
+            changeDom(){
+                timer=setTimeout(() => {
+                    this.setState({
+                        change:'改变'
+                    })
+                }, 2000);
+            }
+            shouldComponentUpdate(nextProps,nextState){ //state状态修改时
+                console.log('shouldComponentUpdate',nextState)
+                return true;
+            }
+
+            render(){
+                console.log('render')
+                let {
+                    change
+                }=this.state;
+                !timer && this.changeDom()
+                return <div>{change}</div>
+            }
+            componentDidMount(){ //组件渲染之后
+                console.log('componentDidMount')
+            }
+            // componentDidUpdate(prevProps,prevState){ //组件重新渲染完成
+            //     console.log('componentDidUpdate')
+            // }
+            // componentUnmount(){ //组件卸载
+                
+            // }
+        }
+        ReactDOM.render(
+            <Index />,
+            document.getElementById('box')
+        )
+    </script>
+</body>
+</html>

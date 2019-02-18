@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.js"></script>
+    <script type="text/babel">
+        //let NewDom=<div>我是一个div</div>
+
+        class App extends React.Component{
+            render(){
+                return <div>
+                react组件
+                <Delit />
+                </div>
+            }
+        }
+
+        class Delit extends React.Component{
+            render(){
+                return <p>react组件下的子集</p>
+            }
+        }
+
+        let NewDom=React.createElement(
+            'div',
+            {
+                id:'box'
+            },
+            '我是一个div'
+        )
+        ReactDOM.render(
+            <App />,
+            document.getElementById('box')
+        )
+    </script>
+</body>
+</html>
